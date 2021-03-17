@@ -8,22 +8,27 @@
 enum opType{ADD, SUB, MUL, DIV, NEG, NUM, ERR};
 
 class Node {
+
     enum opType type;
     int data;
     Node *left{};
     Node *right{};
 
 public:
-    Node(opType type, int data, Node *left, Node *right);
+    Node(opType type, Node *left, Node *right);
 
-    int getValue() const;
-    bool isSafe() const ;
+    explicit Node(int data);
 
-    Node *getLeft() const;
+
+    [[nodiscard]] int getValue() const;
+
+    [[nodiscard]] bool isSafe() const;
+
+    [[nodiscard]] Node *getLeft() const;
 
     void setLeft(Node *left);
 
-    Node *getRight() const;
+    [[nodiscard]] Node *getRight() const;
 
     void setRight(Node *right);
 };
