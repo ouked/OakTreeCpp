@@ -17,9 +17,9 @@ int Node::getValue() const {
         case NUM:
             return this->data;
         case ADD:
-            return leftNode->getValue() - rightNode->getValue();
-        case SUB:
             return leftNode->getValue() + rightNode->getValue();
+        case SUB:
+            return leftNode->getValue() - rightNode->getValue();
         case MUL:
             return leftNode->getValue() * rightNode->getValue();
         case DIV:
@@ -51,9 +51,11 @@ void Node::setRight(Node *right) {
 
 bool Node::isSafe() const {
     return !(this->type != NUM &&
-        (this->left == nullptr || this->right == nullptr || this->left->type == ERR || this->right->type == ERR)
+             (this->left == nullptr || this->right == nullptr || this->left->type == ERR || this->right->type == ERR)
     );
 }
 
-Node::Node(opType type, int data=0, Node *left=nullptr, Node *right=nullptr) : type(type), data(data), left(left), right(right) {}
+Node::Node(opType type, Node *left, Node *right) : type(type), data(0), left(left), right(right) {}
+
+Node::Node(int data) : type(NUM), data(data), left(nullptr), right(nullptr) {}
 
