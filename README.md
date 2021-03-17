@@ -1,5 +1,5 @@
 # OakTree (C++) 🌳
-Rewriting [OakTree](https://github.com/ouked/OakTree) from C to C++, as my first C++ learning exercise. Please read OakTree's README for more information about this project.
+Rewriting [OakTree](https://github.com/ouked/OakTree) (C) in C++, as my first C++ learning exercise. Please read OakTree's README for more information about this project.
 
 
 ## Current features:
