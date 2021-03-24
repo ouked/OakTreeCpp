@@ -6,12 +6,13 @@ Rewriting [OakTree](https://github.com/ouked/OakTree) (C) in C++, as my first C+
 
 - Node class
   - Evaluation of Nodes
+- Stack class
 - Testing Framework
   - Unit tests for Node class
+  - Unit tests for Stack class
   
 ## Features to add from C project:
 
-- Stack class
+
 - Read from file
 - Tests for stack class
-  
