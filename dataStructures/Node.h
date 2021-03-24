@@ -21,7 +21,6 @@ public:
 
     explicit Node(int data);
 
-
     [[nodiscard]] int getValue() const;
 
     [[nodiscard]] bool isSafe() const;

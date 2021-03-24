@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include "Test.h"
-#include "datastructures/Node.h"
-#include "datastructures/Stack.h"
+#include "dataStructures/Node.h"
+#include "dataStructures/Stack.h"
+#include "exceptions/StackException.h"
 
 void testNode(Test &test) {
     Node a = Node(7);
@@ -36,6 +38,13 @@ void testNode(Test &test) {
 
     e = Node(ADD, &d, &b);
     test.assertEqual(e.getValue(), 11);
+
+    Node f = Node(2);
+
+    e = Node(ADD, &f, &b);
+    test.assertEqual(e.getValue(), 3);
+
+
 }
 
 void testStack(Test &test) {
@@ -59,6 +68,77 @@ void testStack(Test &test) {
 
 }
 
+
+Node *treeFromFile(const std::string &filepath) {
+    char c;
+    std::string digitBuffer;
+    bool bBufferEmpty = true;
+    Stack stack = Stack();
+    std::ifstream inputFile(filepath);
+    if (inputFile.is_open()) {
+        while (inputFile.get(c)) {
+            if (isdigit(c)) {
+                bBufferEmpty = false;
+                digitBuffer += c;
+            } else if (c == ' ') {
+                if (!bBufferEmpty) {
+                    Node n = Node(stoi(digitBuffer));
+                    std::cerr << n.getValue() << "\n";
+                    digitBuffer = "";
+                    bBufferEmpty = true;
+                    stack.push(&n);
+                }
+            } else {
+                eOpType op;
+                switch (c) {
+                    case '+':
+                        std::cerr << "ADD!\n";
+                        op = ADD;
+                        break;
+                    case '-':
+                        op = SUB;
+                        break;
+                    case '/':
+                        op = DIV;
+                        break;
+                    case '*':
+                        op = MUL;
+                        break;
+                    case '~':
+                        op = NEG;
+                        break;
+                    default:
+                        throw std::runtime_error("Unknown char in " + filepath + ": " + c + "\n");
+                }
+                Node *left, *right;
+                if (op == NEG) {
+                    if (stack.size() == 0) {
+                        throw StackException("Stack empty.");
+                    }
+                    left = stack.pop();
+                    right = left;
+                } else {
+                    if (stack.size() < 2) {
+                        throw StackException("Not enough items in stack.");
+                    }
+                    left = stack.pop();
+                    right = stack.pop();
+                }
+
+                Node n = Node(op, left, right);
+                stack.push(&n);
+            }
+        }
+        if (!bBufferEmpty) {
+            Node n = Node(stoi(digitBuffer));
+            stack.push(&n);
+        }
+        return stack.pop();
+    } else {
+        throw std::runtime_error("No file at " + filepath);
+    }
+}
+
 void runAllTests() {
     std::cout << "Running tests..." << std::endl;
     Test test = Test();
@@ -69,5 +149,8 @@ void runAllTests() {
 
 int main() {
     runAllTests();
+
+    Node *n = treeFromFile("./input.txt");
+    std::cout << "Result: " << n->getValue() << "\n";
     return 0;
 }

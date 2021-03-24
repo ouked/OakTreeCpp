@@ -2,7 +2,9 @@
 // Created by Alex Dawkins on 24/03/2021.
 //
 
+#include <iostream>
 #include "Stack.h"
+#include "../exceptions/StackException.h"
 
 
 int Stack::size() const {
@@ -15,14 +17,14 @@ Node *Stack::peek() const {
 
 Node *Stack::pop() {
     if (this->pointer == 0) {
-        throw std::runtime_error("Stack empty.");
+        throw StackException("Stack empty.");
     }
-    return data[this->pointer--];
+    return data[--this->pointer];
 }
 
 void Stack::push(Node *n) {
     if (this->pointer == MAX_SIZE) {
-        throw std::runtime_error("Stack size limit reached.");
+        throw StackException("Stack size limit reached.");
     }
-    data[++this->pointer] = n;
+    data[this->pointer++] = n;
 }
