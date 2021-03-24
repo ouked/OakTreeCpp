@@ -42,6 +42,7 @@ int Test::assertNotEqual(int a, int b) {
     this->teardown(result, reason);
 }
 
+
 std::string Test::getResults() const {
     int nPassed = this->getNPassedTests();
     std::string result = std::to_string(nPassed) + "/" + std::to_string(this->nTests) + " tests passed.";
