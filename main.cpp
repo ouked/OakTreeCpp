@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Test.h"
-#include "Node.h"
-#include "Stack.h"
+#include "datastructures/Node.h"
+#include "datastructures/Stack.h"
 
 void testNode(Test &test) {
     Node a = Node(7);

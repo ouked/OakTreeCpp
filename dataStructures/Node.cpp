@@ -3,7 +3,7 @@
 //
 
 #include "Node.h"
-#include "TreeException.h"
+#include "../exceptions/TreeException.h"
 
 int Node::getValue() const {
     if (!this->isSafe()) {
@@ -55,7 +55,7 @@ bool Node::isSafe() const {
     );
 }
 
-Node::Node(opType type, Node *left, Node *right) : type(type), data(0), left(left), right(right) {}
+Node::Node(eOpType type, Node *left, Node *right) : type(type), data(0), left(left), right(right) {}
 
 Node::Node(int data) : type(NUM), data(data), left(nullptr), right(nullptr) {}
 

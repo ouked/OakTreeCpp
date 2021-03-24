@@ -5,17 +5,19 @@
 #ifndef OAKTREEC___NODE_H
 #define OAKTREEC___NODE_H
 
-enum opType{ADD, SUB, MUL, DIV, NEG, NUM, ERR};
+enum eOpType {
+    ADD, SUB, MUL, DIV, NEG, NUM, ERR
+};
 
 class Node {
 
-    enum opType type;
+    enum eOpType type;
     int data;
     Node *left{};
     Node *right{};
 
 public:
-    Node(opType type, Node *left, Node *right);
+    Node(eOpType type, Node *left, Node *right);
 
     explicit Node(int data);
 
