@@ -8,8 +8,12 @@
 void testNode(Test &test) {
     Node a = Node(7);
     test.assertEqual(a.getValue(), 7);
+    test.assertEqual(a.isSafe(), 1);
 
-    Node b = Node(1);
+    Node b = Node(ADD, nullptr, nullptr);
+    test.assertEqual(b.isSafe(), 0);
+
+    b = Node(1);
 
     Node c = Node(SUB, &a, &b);
     test.assertEqual(c.getValue(), 6);
@@ -55,6 +59,7 @@ void testStack(Test &test) {
     test.assertEqual(s.size(), 1);
     test.assertEqual(s.peek()->getValue(), 7);
     test.assertEqual(s.pop()->getValue(), 7);
+
     test.assertEqual(s.size(), 0);
 
     Node m = Node(10);
@@ -80,19 +85,18 @@ Node *treeFromFile(const std::string &filepath) {
             if (isdigit(c)) {
                 bBufferEmpty = false;
                 digitBuffer += c;
+
             } else if (c == ' ') {
                 if (!bBufferEmpty) {
-                    Node n = Node(stoi(digitBuffer));
-                    std::cerr << n.getValue() << "\n";
+                    Node *n = new Node(stoi(digitBuffer));
                     digitBuffer = "";
                     bBufferEmpty = true;
-                    stack.push(&n);
+                    stack.push(n);
                 }
             } else {
                 eOpType op;
                 switch (c) {
                     case '+':
-                        std::cerr << "ADD!\n";
                         op = ADD;
                         break;
                     case '-':
@@ -125,8 +129,8 @@ Node *treeFromFile(const std::string &filepath) {
                     right = stack.pop();
                 }
 
-                Node n = Node(op, left, right);
-                stack.push(&n);
+                Node *n = new Node(op, left, right);
+                stack.push(n);
             }
         }
         if (!bBufferEmpty) {

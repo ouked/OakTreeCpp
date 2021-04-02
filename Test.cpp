@@ -19,7 +19,7 @@ void Test::teardown(int result, const std::string &reason) {
     }
 }
 
-int Test::assertEqual(int a, int b) {
+void Test::assertEqual(int a, int b) {
     this->setup();
     std::string reason;
     int result = 1;
@@ -31,7 +31,7 @@ int Test::assertEqual(int a, int b) {
 }
 
 
-int Test::assertNotEqual(int a, int b) {
+void Test::assertNotEqual(int a, int b) {
     this->setup();
     std::string reason;
     int result = 1;

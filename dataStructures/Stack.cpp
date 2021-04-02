@@ -12,7 +12,7 @@ int Stack::size() const {
 }
 
 Node *Stack::peek() const {
-    return data[this->pointer];
+    return data[this->pointer - 1];
 }
 
 Node *Stack::pop() {
