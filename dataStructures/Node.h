@@ -5,6 +5,8 @@
 #ifndef OAKTREEC___NODE_H
 #define OAKTREEC___NODE_H
 
+#include <string>
+
 enum eOpType {
     ADD, SUB, MUL, DIV, NEG, NUM, ERR
 };
@@ -21,7 +23,6 @@ public:
 
     explicit Node(int data);
 
-
     [[nodiscard]] int getValue() const;
 
     [[nodiscard]] bool isSafe() const;
@@ -33,6 +34,8 @@ public:
     [[nodiscard]] Node *getRight() const;
 
     void setRight(Node *right);
+
+    std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> toString() const;
 };
 
 

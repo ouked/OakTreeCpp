@@ -7,6 +7,7 @@
 
 
 #include <stdexcept>
+#include <list>
 #include "Node.h"
 
 #define MAX_SIZE 64
@@ -15,7 +16,7 @@ class Stack {
 
 private:
     int pointer = 0;
-    Node *data[MAX_SIZE] = {};
+    Node *data[MAX_SIZE];
 
 public:
     [[nodiscard]] int size() const;

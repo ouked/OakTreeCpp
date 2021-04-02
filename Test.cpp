@@ -19,24 +19,24 @@ void Test::teardown(int result, const std::string &reason) {
     }
 }
 
-int Test::assertEqual(int a, int b) {
+void Test::assertEqual(int a, int b) {
     this->setup();
     std::string reason;
     int result = 1;
     if (a != b) {
-        reason = "assertEqual: " + std::to_string(a) + "!=" + std::to_string(b);
+        reason = "assertEqual: " + std::to_string(a) + "!=" + std::to_string(b) + "\n";
         result = 0;
     }
     this->teardown(result, reason);
 }
 
 
-int Test::assertNotEqual(int a, int b) {
+void Test::assertNotEqual(int a, int b) {
     this->setup();
     std::string reason;
     int result = 1;
     if (a == b) {
-        reason = "assertEqual: " + std::to_string(a) + "==" + std::to_string(b);
+        reason = "assertEqual: " + std::to_string(a) + "==" + std::to_string(b) + "\n";
         result = 0;
     }
     this->teardown(result, reason);
@@ -45,7 +45,7 @@ int Test::assertNotEqual(int a, int b) {
 
 std::string Test::getResults() const {
     int nPassed = this->getNPassedTests();
-    std::string result = std::to_string(nPassed) + "/" + std::to_string(this->nTests) + " tests passed.";
+    std::string result = std::to_string(nPassed) + "/" + std::to_string(this->nTests) + " tests passed.\n";
     if (nPassed == this->nTests) {
         result = "Success! " + result;
     }

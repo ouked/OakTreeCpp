@@ -14,13 +14,13 @@ public:
     /// \param a First value
     /// \param b Second value
     /// \return 1 if equal, 0 if not
-    int assertEqual(int a, int b);
+    void assertEqual(int a, int b);
 
     /// Asserts a != b. Prints to cerr and increments failed if this isn't the case.
     /// \param a First value
     /// \param b Second value
     /// \return 0 if equal, 1 if not
-    int assertNotEqual(int a, int b);
+    void assertNotEqual(int a, int b);
 
     /// Resets test counters to 0.
     void reset();
